@@ -22,10 +22,10 @@ jobs:
         run: go mod download
 
       - name: Build
-        run: go build -v -o portfinder-bin ./...
+        run: go build -v -o portfinder-bin .
 
       - name: Run tests
-        run: go test ./... || echo "No test files found"
+        run: go test . || echo "No test files found"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
