@@ -3,7 +3,7 @@ name: Build portfinder
 on:
   push:
     branches:
-      - ino_dev
+      - ite_dev
 
 jobs:
   build:
