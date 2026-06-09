@@ -1,35 +1,28 @@
+cat > .github/workflows/build.yml << 'EOF'
 name: Build portfinder
-
 on:
   push:
     branches:
       - ino_dev
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.24'
-
       - name: Install dependencies
         run: go mod download
-
       - name: Build
-        run: go build -v -o portfinder-bin ./...
-
+        run: go build -v -o build-output/ ./...
       - name: Run tests
         run: go test ./... || echo "No test files found"
-
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: portfinder-binary-${{ github.run_number }}
-          path: portfinder-bin
+          path: build-output/
           retention-days: 7
